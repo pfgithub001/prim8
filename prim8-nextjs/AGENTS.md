@@ -27,6 +27,10 @@ the current Next.js docs before using an API you're unsure about.
 | `pnpm typecheck`    | `next typegen && tsc --noEmit`                 |
 | `pnpm check:routes` | Every route file is registered, and vice versa |
 
+Docker: `docker-compose.yml`, `Makefile` and the Docker `.env` live at the **repo root** (`make up`
+/ `make down` / `make logs` from there, see the root README). This folder only has the
+`Dockerfile` and `.dockerignore`. The app's own vars stay in this folder's `.env`.
+
 ## 3. Structure: Views > Sections > Components
 
 ```

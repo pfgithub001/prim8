@@ -85,3 +85,7 @@ src/
 public/assets/  static files (the only public path that's served)
 scripts/check-routes.ts
 ```
+
+## Docker
+
+Docker runs from the repo root: see [Docker in the root README](../README.md#docker).
