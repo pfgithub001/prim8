@@ -1,0 +1,24 @@
+name: ${PROJECT_NAME:-prim8}
+
+x-defaults: &defaults
+  restart: unless-stopped
+  logging:
+    driver: json-file
+    options: { max-size: "10m", max-file: "3" }
+
+services:
+  nextjs:
+    <<: *defaults
+    build: ./prim8-nextjs
+    image: ${PROJECT_NAME:-prim8}-nextjs
+    container_name: ${PROJECT_NAME:-prim8}-nextjs
+    env_file: ./prim8-nextjs/.env
+    ports:
+      - "${NEXTJS_PORT:-3000}:3000"
+
+networks:
+  default:
+    name: ${PROJECT_NAME:-prim8}-network
+    ipam:
+      config:
+        - subnet: ${NETWORK_SUBNET:-172.29.0.0/16}
