@@ -1,6 +1,7 @@
 -include .env
 export
 
+PROJECT_NAME ?= prim8
 S ?= nextjs
 
 .PHONY: build up down logs shell ps clean
@@ -17,5 +18,6 @@ shell:      ## Shell into a service: make shell S=<service>
 	docker compose exec $(S) sh
 ps:         ## Show services status
 	docker compose ps
-clean:      ## Stop and remove containers, volumes and local images
-	docker compose down -v --rmi local
+clean:      ## Stop and remove containers, volumes and the project's built images
+	docker compose down -v
+	-docker image rm $$(docker compose config --images | grep '^$(PROJECT_NAME)-')

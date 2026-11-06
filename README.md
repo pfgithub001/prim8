@@ -1,4 +1,4 @@
-# iparraguirre-studio
+# prim8
 
 ## Docker
 
@@ -27,22 +27,22 @@ from `prim8-nextjs/.env` at runtime and are never baked into the image.
 
 Root `.env` variables:
 
-| Variable         | Default         | Description                                      |
-| ---------------- | --------------- | ------------------------------------------------ |
-| `PROJECT_NAME`   | `prim8`         | Prefix for containers, images and network        |
-| `NETWORK_SUBNET` | `172.29.0.0/16` | Subnet of the Docker network (must not overlap)  |
+| Variable         | Default         | Description                                     |
+| ---------------- | --------------- | ----------------------------------------------- |
+| `PROJECT_NAME`   | `prim8`         | Prefix for containers, images and network       |
+| `NETWORK_SUBNET` | `172.29.0.0/16` | Subnet of the Docker network (must not overlap) |
 
 There's no database, cache or queue yet, so there are no backup targets.
 
-| Target                   | What it does                                         |
-| ------------------------ | ---------------------------------------------------- |
-| `make build`             | Build the images                                     |
-| `make up`                | Start the stack in the background                    |
-| `make down`              | Stop the stack                                       |
-| `make logs`              | Follow logs                                          |
-| `make shell S=<service>` | Shell into a service (default `nextjs`)              |
-| `make ps`                | Show service status                                  |
-| `make clean`             | Stop and remove containers, volumes and local images |
+| Target                   | What it does                                                       |
+| ------------------------ | ------------------------------------------------------------------ |
+| `make build`             | Build the images                                                   |
+| `make up`                | Start the stack in the background                                  |
+| `make down`              | Stop the stack                                                     |
+| `make logs`              | Follow logs                                                        |
+| `make shell S=<service>` | Shell into a service (default `nextjs`)                            |
+| `make ps`                | Show service status                                                |
+| `make clean`             | Stop and remove containers, volumes and the project's built images |
 
 ### Deploying on Coolify
 
