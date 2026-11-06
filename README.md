@@ -5,14 +5,21 @@
 Requires Docker with Compose v2. Everything runs from the repo root.
 
 ```sh
-cp .env.example .env                              # Docker config (names, network, ports)
+cp .env.example .env                              # Docker config (names, network)
 cp prim8-nextjs/.env.example prim8-nextjs/.env    # app config: fill in real SMTP values
 make up                                           # build and start in the background
 ```
 
-| Service  | Folder          | URL                                   |
-| -------- | --------------- | ------------------------------------- |
-| `nextjs` | `prim8-nextjs/` | http://localhost:3000 (`NEXTJS_PORT`) |
+| Service  | Folder          | Container port                                             |
+| -------- | --------------- | ---------------------------------------------------------- |
+| `nextjs` | `prim8-nextjs/` | `3000`, not published (reached through the platform proxy) |
+
+No port is published on the host, so check the running stack from inside the container (for local
+development use `pnpm dev` in `prim8-nextjs/` instead):
+
+```sh
+docker compose exec nextjs node -e "fetch('http://127.0.0.1:3000/api/health').then(r=>r.text()).then(console.log)"
+```
 
 The Next.js image uses the `output: "standalone"` build on `node:26-slim`, runs as the `node`
 user, and checks its health against `/api/health`. App settings (SMTP, contact inbox) are read
@@ -24,7 +31,6 @@ Root `.env` variables:
 | ---------------- | --------------- | ------------------------------------------------ |
 | `PROJECT_NAME`   | `prim8`         | Prefix for containers, images and network        |
 | `NETWORK_SUBNET` | `172.29.0.0/16` | Subnet of the Docker network (must not overlap)  |
-| `NEXTJS_PORT`    | `3000`          | Host port for the Next.js app (container `3000`) |
 
 There's no database, cache or queue yet, so there are no backup targets.
 
@@ -49,5 +55,4 @@ loads the app vars from the root `.env` that Coolify generates from its Environm
   stays unhealthy (Coolify then serves a 503).
 - Set the domain on the `nextjs` service to `http://<domain>:3000`: the **container** port,
   which the proxy reaches over the Docker network.
-- `NEXTJS_PORT` is only the host port. Change it freely to avoid clashes with other projects on
-  the server, and keep `NETWORK_SUBNET` unique per project too.
+- Keep `NETWORK_SUBNET` unique per project on the server.

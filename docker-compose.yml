@@ -20,8 +20,9 @@ services:
         required: false
       - path: ./prim8-nextjs/.env
         required: false
-    ports:
-      - "${NEXTJS_PORT:-3000}:3000"
+    # Not published on the host: the platform proxy (Coolify's Traefik) reaches it over the network
+    expose:
+      - "3000"
 
 networks:
   default:
