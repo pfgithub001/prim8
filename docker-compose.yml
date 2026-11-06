@@ -12,7 +12,14 @@ services:
     build: ./prim8-nextjs
     image: ${PROJECT_NAME:-prim8}-nextjs
     container_name: ${PROJECT_NAME:-prim8}-nextjs
-    env_file: ./prim8-nextjs/.env
+    # App vars: from prim8-nextjs/.env locally; on a deploy platform that clones from git
+    # (e.g. Coolify) that file is absent and the vars come from the root .env it generates.
+    # Later files win, so locally the app's own .env takes precedence.
+    env_file:
+      - path: ./.env
+        required: false
+      - path: ./prim8-nextjs/.env
+        required: false
     ports:
       - "${NEXTJS_PORT:-3000}:3000"
 

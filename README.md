@@ -37,3 +37,17 @@ There's no database, cache or queue yet, so there are no backup targets.
 | `make shell S=<service>` | Shell into a service (default `nextjs`)              |
 | `make ps`                | Show service status                                  |
 | `make clean`             | Stop and remove containers, volumes and local images |
+
+### Deploying on Coolify
+
+`prim8-nextjs/.env` is gitignored, so it doesn't exist in Coolify's clone. Compose skips it and
+loads the app vars from the root `.env` that Coolify generates from its Environment Variables
+(locally, `prim8-nextjs/.env` wins over the root one):
+
+- Set every key from `prim8-nextjs/.env.example` (SMTP\_\*, `CONTACT_TO`) in Coolify's
+  Environment Variables. Without them the app fails env validation at startup and the container
+  stays unhealthy (Coolify then serves a 503).
+- Set the domain on the `nextjs` service to `http://<domain>:3000`: the **container** port,
+  which the proxy reaches over the Docker network.
+- `NEXTJS_PORT` is only the host port. Change it freely to avoid clashes with other projects on
+  the server, and keep `NETWORK_SUBNET` unique per project too.
