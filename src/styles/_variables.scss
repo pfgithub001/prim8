@@ -1,0 +1,79 @@
+// Design tokens. Modules use these instead of raw values.
+
+// Colors resolve to the theme custom properties in globals.scss (light + dark).
+$color-bg: var(--color-bg);
+$color-surface: var(--color-surface);
+$color-text: var(--color-text);
+$color-text-muted: var(--color-text-muted);
+$color-border: var(--color-border);
+$color-primary: var(--color-primary);
+$color-primary-hover: var(--color-primary-hover);
+$color-primary-contrast: var(--color-primary-contrast);
+$color-danger: var(--color-danger);
+$color-success: var(--color-success);
+$color-focus: var(--color-focus);
+
+// Spacing scale
+$space-1: 0.25rem;
+$space-2: 0.5rem;
+$space-3: 0.75rem;
+$space-4: 1rem;
+$space-5: 1.5rem;
+$space-6: 2rem;
+$space-7: 3rem;
+$space-8: 4rem;
+$space-9: 6rem;
+
+// Radii
+$radius-sm: 0.25rem;
+$radius-md: 0.5rem;
+$radius-lg: 1rem;
+$radius-full: 9999px;
+
+// Typography
+$font-family-sans:
+  system-ui,
+  -apple-system,
+  "Segoe UI",
+  Roboto,
+  "Helvetica Neue",
+  Arial,
+  sans-serif;
+$font-size-xs: 0.75rem;
+$font-size-sm: 0.875rem;
+$font-size-md: 1rem;
+$font-size-lg: 1.25rem;
+$font-size-xl: 1.5rem;
+$font-size-2xl: 2rem;
+$font-size-3xl: clamp(2.25rem, 5vw, 3.5rem);
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-bold: 700;
+$line-height-tight: 1.15;
+$line-height-base: 1.6;
+
+// Layout
+$container-max: 72rem;
+$content-max: 40rem;
+$border-width: 1px;
+$focus-ring-width: 3px;
+
+// Breakpoints (min-width)
+$breakpoints: (
+  sm: 640px,
+  md: 768px,
+  lg: 1024px,
+  xl: 1280px,
+);
+
+// Z-indexes
+$z-base: 0;
+$z-dropdown: 100;
+$z-sticky: 200;
+$z-overlay: 300;
+$z-modal: 400;
+$z-toast: 500;
+
+// Motion
+$transition-fast: 120ms ease-out;
+$transition-base: 200ms ease-out;

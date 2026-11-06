@@ -1,0 +1,39 @@
+@use "variables" as *;
+@use "mixins" as *;
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.label {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+}
+
+.control {
+  width: 100%;
+  padding: $space-3 $space-4;
+  background: $color-bg;
+  border: $border-width solid $color-border;
+  border-radius: $radius-md;
+
+  &:focus-visible {
+    @include focus-ring;
+  }
+
+  &[aria-invalid="true"] {
+    border-color: $color-danger;
+  }
+}
+
+textarea.control {
+  min-height: 8rem;
+  resize: vertical;
+}
+
+.error {
+  font-size: $font-size-sm;
+  color: $color-danger;
+}

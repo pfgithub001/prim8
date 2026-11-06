@@ -1,0 +1,28 @@
+@use "variables" as *;
+@use "mixins" as *;
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: $space-5;
+}
+
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: $space-4;
+}
+
+.success,
+.error {
+  font-size: $font-size-sm;
+}
+
+.success {
+  color: $color-success;
+}
+
+.error {
+  color: $color-danger;
+}

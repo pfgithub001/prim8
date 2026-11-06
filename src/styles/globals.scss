@@ -1,0 +1,116 @@
+@use "variables" as *;
+@use "mixins" as *;
+
+// Theme: the only place raw colors live.
+:root {
+  color-scheme: light dark;
+  --color-bg: #ffffff;
+  --color-surface: #f5f5f4;
+  --color-text: #1c1917;
+  --color-text-muted: #57534e;
+  --color-border: #d6d3d1;
+  --color-primary: #4338ca;
+  --color-primary-hover: #3730a3;
+  --color-primary-contrast: #ffffff;
+  --color-danger: #b91c1c;
+  --color-success: #15803d;
+  --color-focus: #818cf8;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #0c0a09;
+    --color-surface: #1c1917;
+    --color-text: #f5f5f4;
+    --color-text-muted: #a8a29e;
+    --color-border: #44403c;
+    --color-primary: #818cf8;
+    --color-primary-hover: #a5b4fc;
+    --color-primary-contrast: #0c0a09;
+    --color-danger: #f87171;
+    --color-success: #4ade80;
+    --color-focus: #a5b4fc;
+  }
+}
+
+// Modern reset
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  min-height: 100dvh;
+  font-family: $font-family-sans;
+  font-size: $font-size-md;
+  line-height: $line-height-base;
+  color: $color-text;
+  background: $color-bg;
+  -webkit-font-smoothing: antialiased;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: $line-height-tight;
+  text-wrap: balance;
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  @include focus-ring;
+}
+
+@include reduced-motion {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

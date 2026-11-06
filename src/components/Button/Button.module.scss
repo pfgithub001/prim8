@@ -1,0 +1,49 @@
+@use "variables" as *;
+@use "mixins" as *;
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $space-2;
+  padding: $space-3 $space-5;
+  font-size: $font-size-md;
+  font-weight: $font-weight-medium;
+  line-height: 1;
+  text-decoration: none;
+  border: $border-width solid transparent;
+  border-radius: $radius-full;
+  cursor: pointer;
+  transition:
+    background-color $transition-fast,
+    color $transition-fast,
+    border-color $transition-fast;
+
+  &:focus-visible {
+    @include focus-ring;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+}
+
+.primary {
+  color: $color-primary-contrast;
+  background: $color-primary;
+
+  &:hover:not(:disabled) {
+    background: $color-primary-hover;
+  }
+}
+
+.secondary {
+  color: $color-text;
+  background: transparent;
+  border-color: $color-border;
+
+  &:hover:not(:disabled) {
+    border-color: $color-text;
+  }
+}
