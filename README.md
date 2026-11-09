@@ -5,7 +5,7 @@
 Requires Docker with Compose v2. Everything runs from the repo root.
 
 ```sh
-cp .env.example .env                              # Docker config (names, network )
+cp .env.example .env                              # Docker config (names, network)
 cp prim8-nextjs/.env.example prim8-nextjs/.env    # app config: fill in real SMTP values
 make up                                           # build and start in the background
 ```
