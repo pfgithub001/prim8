@@ -1,6 +1,6 @@
-# name, container_name and networks apply to local / plain `docker compose` only.
-# Coolify rewrites them: project and network get the resource UUID, containers become
-# <service>-<uuid>-<timestamp>, and the network gets a 10.0.x.0/24 from Docker's address pool.
+# On Coolify, name and container_name are rewritten (resource UUID, <service>-<uuid>-<timestamp>)
+# and the `default` network is replaced by a UUID network. Named networks like `prim8` below are
+# kept, so the container ends up on both: prim8-network (fixed subnet) and Coolify's UUID network.
 name: ${PROJECT_NAME:-prim8}
 
 x-defaults: &defaults
@@ -26,9 +26,11 @@ services:
     # Not published on the host: the platform proxy (Coolify's Traefik) reaches it over the network
     expose:
       - "3000"
+    networks:
+      - prim8
 
 networks:
-  default:
+  prim8:
     name: ${PROJECT_NAME:-prim8}-network
     ipam:
       config:
