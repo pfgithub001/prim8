@@ -23,6 +23,11 @@ services:
         required: false
       - path: ./prim8-nextjs/.env
         required: false
+    # Pinned here because `environment` beats env_file and the platform's .env: Next's standalone
+    # server binds to HOSTNAME:PORT, and the image healthcheck probes 127.0.0.1:3000
+    environment:
+      HOSTNAME: 0.0.0.0
+      PORT: "3000"
     # Not published on the host: the platform proxy (Coolify's Traefik) reaches it over the network
     expose:
       - "3000"

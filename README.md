@@ -30,7 +30,7 @@ Root `.env` variables:
 | Variable         | Default         | Description                                     |
 | ---------------- | --------------- | ----------------------------------------------- |
 | `PROJECT_NAME`   | `prim8`         | Prefix for containers, images and network       |
-| `NETWORK_SUBNET` | `172.29.0.0/16` | Subnet of the Docker network (must not overlap) |
+| `NETWORK_SUBNET` | `10.0.10.0/24`  | Subnet of the Docker network (must not overlap) |
 
 There's no database, cache or queue yet, so there are no backup targets.
 
@@ -56,3 +56,5 @@ loads the app vars from the root `.env` that Coolify generates from its Environm
 - Set the domain on the `nextjs` service to `http://<domain>:3000`: the **container** port,
   which the proxy reaches over the Docker network.
 - Keep `NETWORK_SUBNET` unique per project on the server.
+- Don't set `HOSTNAME` or `PORT` in Coolify: compose pins them to `0.0.0.0`/`3000` so the server
+  listens on loopback, where the image healthcheck probes `/api/health`.
